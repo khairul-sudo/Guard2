@@ -1,0 +1,225 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 18 May 2025, 10:37:54 pm
+    Author     : kirtie
+*/
+/* Base body and container styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  text-align: left;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+/* Headings */
+.form-container h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Inputs and buttons */
+input[type="text"], input[type="number"], input[type="submit"], button {
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1.8px solid #ced4da;
+  padding: 12px 15px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+}
+
+input[type="submit"], button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  padding: 14px 20px;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, button:hover {
+  background-color: #0056b3;
+}
+
+/* Table styles */
+table {
+  width: 90%;
+  max-width: 700px;
+  border-collapse: collapse;
+  margin: 30px auto 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+}
+
+thead th {
+  padding: 18px 25px;
+  font-weight: 700;
+  text-align: center;
+  user-select: none;
+  font-size: 1.1rem;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #e9f0ff;
+}
+
+tbody td {
+  padding: 14px 20px;
+  text-align: center;
+  vertical-align: middle;
+  color: #333;
+  white-space: normal;
+  font-size: 1.1rem;
+}
+
+/* Align first column text left for better readability */
+tbody td:first-child {
+  text-align: left;
+}
+
+/* Responsive data-label for small devices */
+tbody td[data-label]::before {
+  content: attr(data-label);
+  float: left;
+  font-weight: 700;
+  color: #555;
+  display: none; /* hidden on desktop */
+}
+
+/* Actions cell */
+table td.actions {
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Action links styled as buttons */
+table td.actions a {
+  display: inline-block;
+  padding: 10px 18px;
+  margin: 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  border: none;
+}
+
+/* Edit button style */
+table td.actions a.edit {
+  background-color: #28a745;
+}
+
+table td.actions a.edit:hover {
+  background-color: #218838;
+}
+
+/* Delete button style */
+table td.actions a.delete {
+  background-color: #dc3545;
+}
+
+table td.actions a.delete:hover {
+  background-color: #c82333;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .form-container {
+    width: 95%;
+    padding: 20px 15px;
+  }
+  
+  .form-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"], input[type="number"], input[type="submit"], button {
+    font-size: 1rem;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+  }
+  
+  table, tbody, td, tr {
+    display: block;
+    width: 100%;
+  }
+  
+  tbody tr {
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+  }
+  tbody td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    white-space: normal;
+    font-size: 1rem;
+  }
+  
+  tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+  }
+  
+  table td.actions {
+    text-align: center;
+    padding-left: 15px;
+  }
+  
+  table td.actions a {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
