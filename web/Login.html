@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="guardManagementStyling.css">
+</head>
+<body class="background-Login">
+    <div class="form-container">
+        <h2>Login</h2>
+        <form action="LoginServlet" method="post">
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <input type="submit" value="Login">
+            <div class="forgot-password-container">
+                <a href="" class="forgot-password-link">Forgot password?</a>
+            </div>
+        </form>
+        <a href="register.jsp">Register here</a>
+    </div>
+</body>
+</html>
