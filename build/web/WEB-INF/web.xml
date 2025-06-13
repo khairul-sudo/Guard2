@@ -51,6 +51,23 @@
         <servlet-name>deleteVisitorServlet</servlet-name>
         <url-pattern>/deleteVisitorServlet</url-pattern>
     </servlet-mapping>
+<servlet>
+        <servlet-name>ManageLocationServlet</servlet-name>
+        <servlet-class>servlet.ManageLocationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagePatrolShiftServlet</servlet-name>
+        <servlet-class>servlet.ManagePatrolShiftServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageLocationServlet</servlet-name>
+        <url-pattern>/ManageLocationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagePatrolShiftServlet</servlet-name>
+        <url-pattern>/ManagePatrolShiftServlet</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

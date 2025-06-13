@@ -5,14 +5,14 @@
     <div class="sidebar-section" onclick="toggleSubmenu('guard')">Guard Task</div>
     <div id="guard-submenu" class="submenu">
         <a href="visitorRegistration.jsp">Visitor Registration</a>
-        <a href="#">Patrolling</a>
-        <a href="#">Schedule</a>
+        <a href="checkin.jsp">Patrolling</a>
+        <a href="manage_patrolshift.jsp">Schedule</a>
     </div>
     <div class="sidebar-section" onclick="toggleSubmenu('management')">Management Task</div>
     <div id="management-submenu" class="submenu">
-        <a href="#">Manage Staff</a>
-        <a href="#">Manage Schedule</a>
-        <a href="#">Manage Location</a>
+        <a href="manageStaff.jsp">Manage Staff</a>
+        <a href="manage_patrolshift.jsp">Manage Schedule</a>
+        <a href="manage_location.jsp">Manage Location</a>
     </div>
     <div class="sidebar-section" onclick="toggleSubmenu('visitor')">Visitor Report</div>
     <div id="visitor-submenu" class="submenu">
