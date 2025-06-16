@@ -13,20 +13,78 @@ rs.next();
 <head>
     <title>Edit Location</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        h2 {
+            color: #3399ff;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .form-container input[type="submit"],
+        .form-container a button {
+            background-color: #3399ff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .form-container input[type="submit"]:hover,
+        .form-container a button:hover {
+            background-color: #007acc;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Edit Location</h1>
+<div class="form-container">
+    <h2>Edit Location</h2>
 
-<form method="post">
-    Location Name: <input type="text" name="name" value="<%= rs.getString("name") %>" required><br><br>
-    Address: <input type="text" name="address" value="<%= rs.getString("address") %>" required><br><br>
-    Admin ID: <input type="number" name="adminID" value="<%= rs.getInt("adminID") %>" required><br><br>
-    Guard ID: <input type="number" name="guardID" value="<%= rs.getInt("guardID") %>" required><br><br>
-    <input type="submit" value="Update Location" class="btn">
-</form>
+    <form method="post">
+        <label>Location Name:</label>
+        <input type="text" name="name" value="<%= rs.getString("name") %>" required>
 
-<p><a href="manage_location.jsp" class="btn">Back</a></p>
+        <label>Address:</label>
+        <input type="text" name="address" value="<%= rs.getString("address") %>" required>
+
+        <label>Admin ID:</label>
+        <input type="number" name="adminID" value="<%= rs.getInt("adminID") %>" required>
+
+        <label>Guard ID:</label>
+        <input type="number" name="guardID" value="<%= rs.getInt("guardID") %>" required>
+
+        <input type="submit" value="Update Location">
+    </form>
+
+    <a href="manage_location.jsp"><button type="button">Back</button></a>
+</div>
 
 <%
 if ("POST".equalsIgnoreCase(request.getMethod())) {
