@@ -1,9 +1,3 @@
-<%-- 
-    Document   : manageStaff
-    Created on : 18 May 2025, 11:29:47 pm
-    Author     : kirtie
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List" %>
@@ -17,63 +11,112 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Manage Staff</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css" />
-    </head>
-    <body>
+<head>
+    <title>Manage Staff</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="guardManagementStyling.css">
 
-        <div class="form-container">
-            <h2>Staff List</h2>
+    <style>
+        .content-wrapper {
+            margin-left: 250px; /* adjust if sidebar width changes */
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
 
-            <form method="get" action="staff">
-                <input type="text" name="keyword" placeholder="Search by Administrator ID, Guard ID, or IC Number" value="${param.keyword}"/>
-                <input type="submit" value="Search" />
+        .card {
+            width: 100%;
+            max-width: 1100px;
+            padding: 20px 30px;
+            border-radius: 10px;
+        }
+
+        .search-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-group-action {
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table thead {
+            background-color: #d1f3f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="menu-btn" onclick="toggleSidebar()">&#9776;</div>
+    <%@ include file="sidebar.jsp" %>
+    <%@ include file="header.jsp" %>
+
+    <div class="content-wrapper">
+        <div class="card shadow bg-white">
+            <h3 class="text-center text-primary mb-4">Staff List</h3>
+
+            <form method="get" action="staff" class="search-group">
+                <input type="text" name="keyword" class="form-control" placeholder="Search by Administrator ID, Guard ID, or IC Number" value="${param.keyword}">
+                <button class="btn btn-primary" type="submit">Search</button>
             </form>
 
-            <p>
-                <a href="staff?action=new">Add New Staff</a> | 
-                <a href="staff?action=export">Export as CSV</a>
-            </p>
+            <div class="btn-group-action">
+                <a href="staff?action=new" class="btn btn-success me-2">Add New Staff</a>
+                <a href="staff?action=export" class="btn btn-secondary">Export as CSV</a>
+            </div>
 
-            <table border="1" cellpadding="5" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Administrator ID</th>
-                        <th>Guard ID</th>
-                        <th>IC Number</th>
-                        <th>Phone Number</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="staff" items="${staffList}">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td data-label="Administrator ID">${staff.administratorAdminID}</td>
-                            <td data-label="Guard ID">${staff.guardGuardID}</td>
-                            <td data-label="IC Number">${staff.icNumber}</td>
-                            <td data-label="Phone Number">${staff.phoneNumber}</td>
-                            <td data-label="Actions" class="actions">
-                                <a href="staff?action=edit&administratorAdminID=${staff.administratorAdminID}&guardGuardID=${staff.guardGuardID}" class="edit">Edit</a>
-                                <form action="staff" method="post" style="display:inline;">
-                                    <input type="hidden" name="action" value="delete" />
-                                    <input type="hidden" name="administratorAdminID" value="${staff.administratorAdminID}" />
-                                    <input type="hidden" name="guardGuardID" value="${staff.guardGuardID}" />
-                                    <input type="submit" value="Delete" class="delete" onclick="return confirm('Delete this staff?');" />
-                                </form>
-                            </td>
+                            <th>Administrator ID</th>
+                            <th>Guard ID</th>
+                            <th>IC Number</th>
+                            <th>Phone Number</th>
+                            <th>Actions</th>
                         </tr>
-                    </c:forEach>
-                    <c:if test="${empty staffList}">
-                        <tr><td colspan="5">No records found</td></tr>
-                    </c:if>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="staff" items="${staffList}">
+                            <tr>
+                                <td>${staff.administratorAdminID}</td>
+                                <td>${staff.guardGuardID}</td>
+                                <td>${staff.icNumber}</td>
+                                <td>${staff.phoneNumber}</td>
+                                <td>
+                                    <a href="staff?action=edit&administratorAdminID=${staff.administratorAdminID}&guardGuardID=${staff.guardGuardID}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                    <form action="staff" method="post" style="display:inline;">
+                                        <input type="hidden" name="action" value="delete" />
+                                        <input type="hidden" name="administratorAdminID" value="${staff.administratorAdminID}" />
+                                        <input type="hidden" name="guardGuardID" value="${staff.guardGuardID}" />
+                                        <input type="submit" class="btn btn-sm btn-danger" value="Delete" onclick="return confirm('Delete this staff?');" />
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <c:if test="${empty staffList}">
+                            <tr>
+                                <td colspan="5" class="text-muted">No records found</td>
+                            </tr>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
 
-            <br/><br/>
-            <form action="homepage.jsp" method="get" style="display:inline;">
-                <button type="submit">Back</button>
-            </form>
+            <div class="text-center mt-3">
+                <form action="homepage.jsp" method="get">
+                    <button type="submit" class="btn btn-outline-primary">Back</button>
+                </form>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

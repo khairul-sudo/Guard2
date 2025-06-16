@@ -18,8 +18,14 @@ boolean isEdit = (staff != null);
 <head>
     <title><%= isEdit ? "Edit Staff" : "Add New Staff" %></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="guardManagementStyling.css">
 </head>
 <body>
+    
+    <div id="menu-btn" onclick="toggleSidebar()">&#9776;</div>
+    <%@ include file="sidebar.jsp" %>
+    <%@ include file="header.jsp" %>
 
 <div class="form-container">
     <h2><%= isEdit ? "Edit Staff" : "Add New Staff" %></h2>
