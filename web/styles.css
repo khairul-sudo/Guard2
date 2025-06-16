@@ -6,6 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 18 May 2025, 10:37:54 pm
     Author     : kirtie
 */
+
 /* Base body and container styles */
 body {
   margin: 0;
@@ -13,17 +14,162 @@ body {
   background-color: #f8f9fa;
 }
 
-.form-container {
-  width: 100%;
-  max-width: 900px;
-  margin: 20px auto;
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    padding-top: 56px; /* below header */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.sidebar .logo img {
+    width: 100px;
+    margin: 10px auto;
+    display: block;
+}
+
+.sidebar-section {
+    padding: 15px;
+    margin: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #f9f9f9;
+    color: #007bff;
+}
+
+.sidebar-section:hover {
+    background-color: #495057;
+}
+
+.submenu {
+    display: none;
+    background-color: #333;
+    padding-left: 15px;
+}
+
+.submenu.active {
+    display: block;
+}
+
+.submenu a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #343a40;
+}
+
+.logout {
+    display: none;
+}
+
+.logout:hover {
+    background-color: #c82333;
+}
+
+.content {
+    margin-left: 250px; /* space for sidebar */
+    margin-top: 56px;   /* space for header */
+    padding: 2rem;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+.content h1 {
+    color: #212529;
+}
+
+
+
+.header {
+   height: 56px; 
+   background: #ffffff; 
+   border-bottom: 1px solid #ddd; 
+   display: flex; 
+   align-items: center; 
+   justify-content: space-between; 
+   padding: 0 20px; 
+   position: fixed; 
+   width: 100%; 
+   top: 0; 
+   z-index: 1000;
+}
+/* Hover effect for "Guard Management" header title */
+.header-title {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.header-title:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* Hover effect for Logout link */
+.logout-link {
+    color: #dc3545;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logout-link:hover {
+    color: darkred; /* Darker red on hover */
+    text-decoration: underline;
+    
+}
+
+/* Sidebar stays on the left */
+.sidebar {
+  width: 200px; /* Fixed width for sidebar */
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  margin-right: 30px;
   padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* Main content area (form container) */
+.form-container {
+  flex: 1; /* Content area takes up remaining space */
+  padding: 40px;
   background-color: #ffffff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
-  text-align: left;
+  max-width: 900px;
+  text-align: center;
   box-sizing: border-box;
-  overflow-x: auto;
 }
 
 /* Headings */
@@ -31,7 +177,6 @@ body {
   font-size: 2.4rem;
   font-weight: 700;
   color: #007bff;
-  text-align: center;
   margin-bottom: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -44,10 +189,7 @@ input[type="text"], input[type="number"], input[type="submit"], button {
   padding: 12px 15px;
   box-sizing: border-box;
   margin-bottom: 20px;
-}
-
-input[type="text"], input[type="number"] {
-  width: 100%;
+  width: 50%;
 }
 
 input[type="submit"], button {
@@ -114,15 +256,6 @@ tbody td:first-child {
   text-align: left;
 }
 
-/* Responsive data-label for small devices */
-tbody td[data-label]::before {
-  content: attr(data-label);
-  float: left;
-  font-weight: 700;
-  color: #555;
-  display: none; /* hidden on desktop */
-}
-
 /* Actions cell */
 table td.actions {
   white-space: nowrap;
@@ -163,29 +296,37 @@ table td.actions a.delete:hover {
   background-color: #c82333;
 }
 
-/* Responsive styles */
-@media (max-width: 600px) {
+/* Responsive styles for small devices */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack sidebar and form */
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%; /* Sidebar takes full width */
+    margin-bottom: 20px; /* Adds space between sidebar and form */
+  }
+
   .form-container {
-    width: 95%;
-    padding: 20px 15px;
+    width: 100%; /* Form takes full width */
+    margin-left: 0;
+    padding: 20px;
   }
-  
-  .form-container h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
+
   input[type="text"], input[type="number"], input[type="submit"], button {
     font-size: 1rem;
     padding: 10px 12px;
     margin-bottom: 16px;
+    width: 100%; /* Full width on mobile */
   }
-  
+
+  /* Table responsive adjustments */
   table, tbody, td, tr {
     display: block;
     width: 100%;
   }
-  
+
   tbody tr {
     margin-bottom: 20px;
     background: #fff;
@@ -193,6 +334,7 @@ table td.actions a.delete:hover {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 15px;
   }
+
   tbody td {
     text-align: right;
     padding-left: 50%;
@@ -200,7 +342,7 @@ table td.actions a.delete:hover {
     white-space: normal;
     font-size: 1rem;
   }
-  
+
   tbody td::before {
     content: attr(data-label);
     position: absolute;
@@ -211,12 +353,12 @@ table td.actions a.delete:hover {
     text-align: left;
     white-space: nowrap;
   }
-  
+
   table td.actions {
     text-align: center;
     padding-left: 15px;
   }
-  
+
   table td.actions a {
     display: inline-block;
     padding: 8px 14px;
