@@ -14,15 +14,139 @@ body {
   background-color: #f8f9fa;
 }
 
-/* Container for sidebar + content */
-.container {
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 20px;
-  gap: 30px; /* No default gap between elements */
-  padding: 20px;
-  flex-wrap: nowrap; /* Prevents wrapping on larger screens */
-    width: 100%; /* Ensure it takes up the full width */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    padding-top: 56px; /* below header */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.sidebar .logo img {
+    width: 100px;
+    margin: 10px auto;
+    display: block;
+}
+
+.sidebar-section {
+    padding: 15px;
+    margin: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #f9f9f9;
+    color: #007bff;
+}
+
+.sidebar-section:hover {
+    background-color: #495057;
+}
+
+.submenu {
+    display: none;
+    background-color: #333;
+    padding-left: 15px;
+}
+
+.submenu.active {
+    display: block;
+}
+
+.submenu a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #343a40;
+}
+
+.logout {
+    display: none;
+}
+
+.logout:hover {
+    background-color: #c82333;
+}
+
+.content {
+    margin-left: 250px; /* space for sidebar */
+    margin-top: 56px;   /* space for header */
+    padding: 2rem;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+.content h1 {
+    color: #212529;
+}
+
+
+
+.header {
+   height: 56px; 
+   background: #ffffff; 
+   border-bottom: 1px solid #ddd; 
+   display: flex; 
+   align-items: center; 
+   justify-content: space-between; 
+   padding: 0 20px; 
+   position: fixed; 
+   width: 100%; 
+   top: 0; 
+   z-index: 1000;
+}
+/* Hover effect for "Guard Management" header title */
+.header-title {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.header-title:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* Hover effect for Logout link */
+.logout-link {
+    color: #dc3545;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logout-link:hover {
+    color: darkred; /* Darker red on hover */
+    text-decoration: underline;
+    
 }
 
 /* Sidebar stays on the left */
@@ -42,7 +166,6 @@ body {
   padding: 40px;
   background-color: #ffffff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
-    margin-left: 30px; /* Adds gap between sidebar and form */
   border-radius: 10px;
   max-width: 900px;
   text-align: center;
