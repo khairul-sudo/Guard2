@@ -12,13 +12,24 @@
 </head>
 <body>
     <div id="menu-btn" onclick="toggleSidebar()">&#9776;</div>
-    <%@ include file="sidebar.jsp" %> 
-
-    <a class="logout" href="logout.jsp">LOGOUT</a>
+    <%@ include file="sidebar.jsp" %>
+    <%@ include file="header.jsp" %>
 
     <div class="content container mt-5">
         <h1>Visitor Report</h1>
 
+        <!-- Search Form -->
+        <form method="get" action="visitorReport.jsp" class="row g-2 align-items-center mb-3" style="max-width: 400px;">
+            <div class="col">
+                <input type="text" name="keyword" class="form-control form-control-sm" placeholder="Search name , Purpose OR IC..." value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : "" %>">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                <a href="visitorReport.jsp" class="btn btn-sm btn-secondary">Cancel</a>
+            </div>
+        </form>
+
+        <!-- Flash messages -->
         <%
             String message = request.getParameter("message");
             if (message != null) {
@@ -33,10 +44,33 @@
         <%
             }
 
+            int currentPage = 1;
+            int recordsPerPage = 10;
+            if (request.getParameter("page") != null) {
+                currentPage = Integer.parseInt(request.getParameter("page"));
+            }
+            int offset = (currentPage - 1) * recordsPerPage;
+
             visitorDAO dao = new visitorDAO();
-            List<Visitor> visitors = dao.selectAllVisitors();
+            List<Visitor> visitors;
+            String keyword = request.getParameter("keyword");
+
+            int totalRecords = 0;
+            int totalPages = 0;
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                visitors = dao.searchVisitorsWithPagination(keyword, offset, recordsPerPage);
+                totalRecords = dao.countSearchVisitors(keyword);
+            } else {
+                visitors = dao.selectVisitorsWithPagination(offset, recordsPerPage);
+                totalRecords = dao.countVisitors();
+            }
+            totalPages = (int) Math.ceil(totalRecords * 1.0 / recordsPerPage);
         %>
 
+        <% if (visitors.isEmpty()) { %>
+            <p class="text-danger">No visitor found<%= (keyword != null ? " for \"" + keyword + "\"" : "") %></p>
+        <% } else { %>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -64,6 +98,18 @@
                 <% } %>
             </tbody>
         </table>
+
+        <!-- Pagination Controls -->
+        <nav>
+            <ul class="pagination">
+                <% for (int i = 1; i <= totalPages; i++) { %>
+                    <li class="page-item <%= (i == currentPage) ? "active" : "" %>">
+                        <a class="page-link" href="visitorReport.jsp?page=<%= i %><%= (keyword != null ? "&keyword=" + keyword : "") %>"><%= i %></a>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
+        <% } %>
 
         <a href="visitorRegistration.jsp" class="btn btn-primary">Add New Visitor</a>
     </div>

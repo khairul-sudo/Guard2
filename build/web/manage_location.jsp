@@ -15,7 +15,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 30px;
             background-color: #ffffff;
@@ -39,6 +39,7 @@
             font-size: 1rem;
             text-decoration: none;
             margin-bottom: 20px;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -74,64 +75,123 @@
         a.action-link:hover {
             text-decoration: underline;
         }
+
+        .back-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        /* Optional: Sidebar menu button (hamburger style) */
+        #menu-btn {
+            font-size: 24px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                display: none;
+                position: absolute;
+                z-index: 1000;
+                background-color: #111;
+                width: 200px;
+                height: 100%;
+            }
+
+            #menu-btn {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Manage Locations</h1>
+    <!-- Menu toggle for mobile (optional) -->
+    <div id="menu-btn" onclick="toggleSidebar()">☰ Menu</div>
 
-    <a href="add_location.jsp" class="btn">+ Add New Location</a>
+    <%@ include file="sidebar.jsp" %>
+    <%@ include file="header.jsp" %>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Location Name</th>
-                <th>Address</th>
-                <th>Admin ID</th>
-                <th>Guard ID</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <%
-            Connection conn = null;
-            Statement stmt = null;
-            ResultSet rs = null;
+    <div class="container">
+        <h1>Manage Locations</h1>
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM location");
+        <a href="add_location.jsp" class="btn">+ Add New Location</a>
 
-                while (rs.next()) {
-        %>
-            <tr>
-                <td><%= rs.getInt("locationID") %></td>
-                <td><%= rs.getString("name") %></td>
-                <td><%= rs.getString("address") %></td>
-                <td><%= rs.getInt("adminID") %></td>
-                <td><%= rs.getInt("guardID") %></td>
-                <td>
-                    <a class="action-link" href="edit_location.jsp?id=<%= rs.getInt("locationID") %>">Edit</a> |
-                    <a class="action-link" href="delete_location.jsp?id=<%= rs.getInt("locationID") %>" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            </tr>
-        <%
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location Name</th>
+                    <th>Address</th>
+                    <th>Admin ID</th>
+                    <th>Guard ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%
+                Connection conn = null;
+                Statement stmt = null;
+                ResultSet rs = null;
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
+                    stmt = conn.createStatement();
+                    rs = stmt.executeQuery("SELECT * FROM location");
+
+                    while (rs.next()) {
+            %>
+                <tr>
+                    <td><%= rs.getInt("locationID") %></td>
+                    <td><%= rs.getString("name") %></td>
+                    <td><%= rs.getString("address") %></td>
+                    <td><%= rs.getInt("adminID") %></td>
+                    <td><%= rs.getInt("guardID") %></td>
+                    <td>
+                        <a class="action-link" href="edit_location.jsp?id=<%= rs.getInt("locationID") %>">Edit</a> |
+                        <a class="action-link" href="delete_location.jsp?id=<%= rs.getInt("locationID") %>" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+            <%
+                    }
+                } catch (Exception e) {
+                    out.println("<tr><td colspan='6'>Error: " + e.getMessage() + "</td></tr>");
+                } finally {
+                    if (rs != null) rs.close();
+                    if (stmt != null) stmt.close();
+                    if (conn != null) conn.close();
                 }
-            } catch (Exception e) {
-                out.println("<tr><td colspan='6'>Error: " + e.getMessage() + "</td></tr>");
-            } finally {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+            %>
+            </tbody>
+        </table>
+
+        <div class="back-container">
+            <form action="index.jsp" method="get">
+                <button type="submit" class="btn">Back</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        function toggleSubmenu(menu) {
+            const submenu = document.getElementById(menu + '-submenu');
+            if (submenu) {
+                submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
             }
-        %>
-        </tbody>
-    </table>
-</div>
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar) {
+                sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
