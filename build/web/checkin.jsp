@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css" />
 </head>
 <body>
-        <jsp:include page="sidebar.jsp" />
+    <jsp:include page="sidebar.jsp" />
+    <div class="container">
         <div class="form-container">
             <h2>Check-In / Check-Out Patrolling Session</h2>
             <form action="${pageContext.request.contextPath}/CheckpointServlet" method="post">
@@ -33,5 +34,6 @@
                 <input type="submit" value="Submit Patrol Data">
             </form>
         </div>
+    </div>
 </body>
 </html>
