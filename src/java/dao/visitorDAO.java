@@ -10,7 +10,7 @@ import user.Visitor;
 
 public class visitorDAO {
 
-    private static final String INSERT_SQL = "INSERT INTO visitor (Name, IC, Address, Purpose, userID) VALUES (?, ?, ?, ?, ?)"; // Added userID
+    private static final String INSERT_SQL = "INSERT INTO visitor (Name, IC, Address, Purpose, visit_datetime, userID) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT * FROM visitor";
     private static final String DELETE_SQL = "DELETE FROM visitor WHERE visitorID=?";
     private static final String UPDATE_SQL = "UPDATE visitor SET Name=?, IC=?, Address=?, Purpose=? WHERE visitorID=?";
@@ -27,16 +27,16 @@ public class visitorDAO {
 
     // Updated insertVisitor method to accept userID
     public void insertVisitor(Visitor visitor, String userID) throws SQLException {
-        try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(INSERT_SQL)) {
-            ps.setString(1, visitor.getName());
-            ps.setString(2, visitor.getIc());
-            ps.setString(3, visitor.getAddress());
-            ps.setString(4, visitor.getPurpose());
-            ps.setString(5, userID); // Set the userID
-            ps.executeUpdate();
-        }
+    try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(INSERT_SQL)) {
+        ps.setString(1, visitor.getName());
+        ps.setString(2, visitor.getIc());
+        ps.setString(3, visitor.getAddress());
+        ps.setString(4, visitor.getPurpose());
+        ps.setString(5, visitor.getVisitDateTime());  // visit_datetime
+        ps.setString(6, userID);
+        ps.executeUpdate();
     }
-
+}
     public List<Visitor> selectAllVisitors() throws SQLException {
         List<Visitor> visitors = new ArrayList<>();
         try (Connection con = getConnection(); Statement stmt = con.createStatement()) {
@@ -49,6 +49,7 @@ public class visitorDAO {
                 v.setAddress(rs.getString("Address"));
                 v.setPurpose(rs.getString("Purpose"));
                 v.setUserID(rs.getString("userID")); // Retrieve userID as well
+                v.setVisitDateTime(rs.getString("visit_datetime"));
                 visitors.add(v);
             }
         }

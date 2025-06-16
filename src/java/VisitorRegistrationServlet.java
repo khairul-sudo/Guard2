@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -6,9 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.visitorDAO;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import user.Visitor;
 
 public class VisitorRegistrationServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,13 +20,12 @@ public class VisitorRegistrationServlet extends HttpServlet {
         String ic = request.getParameter("IC");
         String address = request.getParameter("Address");
         String purpose = request.getParameter("Purpose");
-
-        // Retrieve the logged-in user's ID from the session
+        String visitDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         HttpSession session = request.getSession();
         String loggedInUserId = (String) session.getAttribute("loggedInUserId");
 
         if (loggedInUserId != null) {
-            Visitor visitor = new Visitor(name, ic, address, purpose);
+            Visitor visitor = new Visitor(name, ic, address, purpose,visitDateTime);
             visitorDAO visitorDao = new visitorDAO();
 
             try {

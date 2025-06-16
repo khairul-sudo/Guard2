@@ -1,46 +1,58 @@
 
 import DB.DBConnection;
-import user.User;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.io.*;
+import java.sql.*;
 
 public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String name = request.getParameter("name");
-            String address = request.getParameter("address");
-            String ICnum =request.getParameter("ICnum");
-            String roles = request.getParameter("roles");
-            String email = request.getParameter("email");
-            String contact = request.getParameter("contact");
-            String password = request.getParameter("password");
 
-            User user = new User(name, address, ICnum, roles, contact, email, password);
+        String password = request.getParameter("password");
+        String roles = request.getParameter("roles");
+        String name = request.getParameter("name");
+        String ICnum = request.getParameter("ICnum");
+        String address = request.getParameter("address");
+        String contact = request.getParameter("contact");
+        String email = request.getParameter("email");
 
-            try (Connection conn = DBConnection.getConnection()) {
-                String sql = "INSERT INTO user (name, address, ICnum, roles, email, contact, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, user.getName());
-                stmt.setString(2, user.getAddress());
-                stmt.setString(3, user.getICnum());
-                stmt.setString(4, user.getRoles());
-                stmt.setString(6, user.getEmail());
-                stmt.setString(5, user.getContact());
-                stmt.setString(7, user.getPassword());
-                
-                stmt.executeUpdate();
+        try (Connection con = DBConnection.getConnection()) {
+            String sqlUser = "INSERT INTO user (name, address, ICnum, roles, email, contact, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement psUser = con.prepareStatement(sqlUser, Statement.RETURN_GENERATED_KEYS);
+            psUser.setString(1, name);
+            psUser.setString(2, address);
+            psUser.setString(3, ICnum);
+            psUser.setString(4, roles);
+            psUser.setString(5, email);
+            psUser.setString(6, contact);
+            psUser.setString(7, password);
+
+            psUser.executeUpdate();
+
+            ResultSet rs = psUser.getGeneratedKeys();
+            int userID = 0;
+            if (rs.next()) {
+                userID = rs.getInt(1);
+            }
+
+            if ("Guard".equalsIgnoreCase(roles)) {
+                String sqlGuard = "INSERT INTO guard (userID) VALUES (?)";
+                PreparedStatement psGuard = con.prepareStatement(sqlGuard);
+                psGuard.setInt(1, userID);
+                psGuard.executeUpdate();
+            } else {
+                String sqlAdmin = "INSERT INTO administrator (userID) VALUES (?)";
+                PreparedStatement psAdmin = con.prepareStatement(sqlAdmin);
+                psAdmin.setInt(1, userID);
+                psAdmin.executeUpdate();
             }
 
             response.sendRedirect("notification/success.jsp");
-
         } catch (Exception e) {
-            request.setAttribute("errorMessage", "Error: " + e.getMessage());
-            request.getRequestDispatcher("notification/success.jsp").forward(request, response);
+            response.getWriter().println("Error: " + e.getMessage());
         }
     }
 }

@@ -20,9 +20,10 @@ public class updateVisitorServlet extends HttpServlet {
         String ic = request.getParameter("IC");
         String address = request.getParameter("Address");
         String purpose = request.getParameter("Purpose");
+        String visitDateTime = request.getParameter("visitDateTime");
 
-        Visitor visitor = new Visitor(name, ic, address, purpose);
-        visitor.setId(id); // Set the ID for updating
+        Visitor visitor = new Visitor(name, ic, address, purpose,visitDateTime);
+        visitor.setId(id);
 
         try {
             visitorDAO.updateVisitor(visitor);
