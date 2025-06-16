@@ -39,6 +39,7 @@
             font-size: 1rem;
             text-decoration: none;
             margin-bottom: 20px;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -73,6 +74,11 @@
 
         a.action-link:hover {
             text-decoration: underline;
+        }
+
+        .back-container {
+            margin-top: 20px;
+            text-align: left;
         }
     </style>
 </head>
@@ -131,6 +137,13 @@
         %>
         </tbody>
     </table>
+
+    <!-- Back button below table -->
+    <div class="back-container">
+        <form action="index.jsp" method="get">
+            <button type="submit" class="btn">Back</button>
+        </form>
+    </div>
 </div>
 
 </body>
