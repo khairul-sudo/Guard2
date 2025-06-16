@@ -1,8 +1,7 @@
-dist/GuarfManagement.war
-nbproject/genfiles.properties
-*.properties
-*.properties
+*.jar
+*.xml
 *.properties
 *.properties
 *.xml
 *.xml
+*.properties

@@ -1,3 +1,4 @@
+<%@page import="DB.DBConnection"%>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
@@ -183,10 +184,7 @@
                         ResultSet   rs   = null;
 
                         try {
-                            Class.forName("com.mysql.jdbc.Driver"); // or com.mysql.cj.jdbc.Driver for MySQL 8+
-                            conn = DriverManager.getConnection(
-                                   "jdbc:mysql://localhost:3306/guarddb",
-                                   "root", "");
+                            conn = DBConnection.getConnection();
                             stmt = conn.createStatement();
                             rs   = stmt.executeQuery("SELECT * FROM patrolshift");
 
