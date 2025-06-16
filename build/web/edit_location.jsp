@@ -1,8 +1,9 @@
+<%@page import="DB.DBConnection"%>
 <%@ page import="java.sql.*" %>
 <%
+     Connection conn = null;
 int id = Integer.parseInt(request.getParameter("id"));
-Class.forName("com.mysql.jdbc.Driver");
-Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
+ conn = DBConnection.getConnection();
 PreparedStatement ps = conn.prepareStatement("SELECT * FROM location WHERE locationID=?");
 ps.setInt(1, id);
 ResultSet rs = ps.executeQuery();

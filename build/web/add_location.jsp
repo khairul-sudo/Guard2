@@ -4,6 +4,7 @@
     Author     : H U A W E I
 --%>
 
+<%@page import="DB.DBConnection"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
@@ -85,9 +86,9 @@
 
 <%
 if ("POST".equalsIgnoreCase(request.getMethod())) {
+ Connection conn = null;
     try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
+        conn = DBConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement("INSERT INTO location (name, address, adminID, guardID) VALUES (?, ?, ?, ?)");
         ps.setString(1, request.getParameter("name"));
         ps.setString(2, request.getParameter("address"));

@@ -3,6 +3,7 @@
     Created on : 22 May 2025, 3:10:13?pm
     Author     : H U A W E I
 --%>
+<%@page import="DB.DBConnection"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
@@ -47,10 +48,10 @@
     <h2>Deleting Patrol Shift...</h2>
 
 <%
+Connection conn = null;
 try {
     int id = Integer.parseInt(request.getParameter("id"));
-    Class.forName("com.mysql.jdbc.Driver"); // or use com.mysql.cj.jdbc.Driver if needed
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
+    conn = DBConnection.getConnection();
     PreparedStatement ps = conn.prepareStatement("DELETE FROM patrolshift WHERE patrolShiftID=?");
     ps.setInt(1, id);
     ps.executeUpdate();

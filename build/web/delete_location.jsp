@@ -4,6 +4,7 @@
     Author     : H U A W E I
 --%>
 
+<%@page import="DB.DBConnection"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
@@ -48,11 +49,11 @@
     <h2>Deleting Location...</h2>
 
 <%
+Connection conn = null;
 try {
     int id = Integer.parseInt(request.getParameter("id"));
 
-    Class.forName("com.mysql.jdbc.Driver"); // Change to com.mysql.cj.jdbc.Driver if needed
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
+    conn = DBConnection.getConnection();
     PreparedStatement ps = conn.prepareStatement("DELETE FROM location WHERE locationID=?");
     ps.setInt(1, id);
     ps.executeUpdate();
