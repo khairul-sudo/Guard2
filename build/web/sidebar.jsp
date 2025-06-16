@@ -16,7 +16,7 @@
     </div>
     <div class="sidebar-section" onclick="toggleSubmenu('visitor')">Visitor Report</div>
     <div id="visitor-submenu" class="submenu">
-        <a href="visitorReport.jsp">Visitor Report</a>
+        <a href="visitorReport.jsp">VisitorReport</a>
         <a href="visitor">visitor data</a>
     </div>
     <div class="sidebar-section" onclick="toggleSubmenu('report')">Report</div>
