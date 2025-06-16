@@ -14,7 +14,7 @@ public class UserDao {
         List<Staff> list = new ArrayList<>();
         String sql = "SELECT * FROM staff WHERE CAST(AdministratoradminID AS CHAR) LIKE ? OR CAST(GuardguardID AS CHAR) LIKE ? OR ICnumber LIKE ? ORDER BY AdministratoradminID";
 
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             String likeKeyword = "%" + keyword + "%";
             ps.setString(1, likeKeyword);
@@ -38,7 +38,7 @@ public class UserDao {
     public Staff getStaffById(int administratorAdminID, int guardGuardID) throws SQLException, ClassNotFoundException {
         Staff staff = null;
         String sql = "SELECT * FROM staff WHERE AdministratoradminID = ? AND GuardguardID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, administratorAdminID);
             ps.setInt(2, guardGuardID);
@@ -58,7 +58,7 @@ public class UserDao {
 
     public boolean addStaff(Staff staff) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO staff (AdministratoradminID, GuardguardID, ICnumber, phoneNumber) VALUES (?, ?, ?, ?)";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, staff.getAdministratorAdminID());
             ps.setInt(2, staff.getGuardGuardID());
@@ -70,7 +70,7 @@ public class UserDao {
 
     public boolean updateStaff(Staff staff) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE staff SET ICnumber = ?, phoneNumber = ? WHERE AdministratoradminID = ? AND GuardguardID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, staff.getIcNumber());
             ps.setString(2, staff.getPhoneNumber());
@@ -82,7 +82,7 @@ public class UserDao {
     
     public boolean administratorExists(int adminID) throws SQLException, ClassNotFoundException {
         String sql = "SELECT 1 FROM administrator WHERE adminID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, adminID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -93,7 +93,7 @@ public class UserDao {
     
     public boolean guardExists(int guardID) throws SQLException, ClassNotFoundException {
         String sql = "SELECT 1 FROM guard WHERE guardID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, guardID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -104,7 +104,7 @@ public class UserDao {
 
     public boolean deleteStaff(int administratorAdminID, int guardGuardID) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM staff WHERE AdministratoradminID = ? AND GuardguardID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, administratorAdminID);
             ps.setInt(2, guardGuardID);
@@ -115,7 +115,7 @@ public class UserDao {
     public String exportStaffToCSV() throws SQLException, ClassNotFoundException {
         StringBuilder csv = new StringBuilder("AdministratoradminID,GuardguardID,ICnumber,PhoneNumber\n");
         String sql = "SELECT * FROM staff ORDER BY AdministratoradminID, GuardguardID";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -130,7 +130,7 @@ public class UserDao {
     
     public boolean locationExists(int locationID) throws SQLException, ClassNotFoundException {
         String sql = "SELECT 1 FROM location WHERE locationID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, locationID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -142,7 +142,7 @@ public class UserDao {
     // Insert new patrol session on check-in, returning the generated session ID
     public int addPatrolCheckin(int guardId, int locationId) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO patrollingsession (guardID, locationID, checkinTime) VALUES (?, ?, CURRENT_TIMESTAMP)";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, guardId);
             ps.setInt(2, locationId);
@@ -159,7 +159,7 @@ public class UserDao {
     // Get open session id (checkin done but no checkout yet) for guard & location
     public Integer getOpenSessionId(int guardId, int locationId) throws SQLException, ClassNotFoundException {
         String sql = "SELECT patrollingSessionID FROM patrollingsession WHERE guardID = ? AND locationID = ? AND checkoutTime IS NULL LIMIT 1";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, guardId);
             ps.setInt(2, locationId);
@@ -175,7 +175,7 @@ public class UserDao {
     // Update patrol session on checkout with checkout time, summary, and incident
     public boolean updatePatrolCheckout(int sessionId, String summary, String incident) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE patrollingsession SET checkoutTime = CURRENT_TIMESTAMP, summary = ?, incident = ? WHERE patrollingSessionID = ?";
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, summary);
             ps.setString(2, incident);
@@ -188,7 +188,7 @@ public class UserDao {
     public PatrolSession getPatrolSessionById(int sessionId) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM patrollingsession WHERE patrollingSessionID = ?";
         PatrolSession session = null;
-        try (Connection con = DatabaseConnection.getConnection();
+        try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, sessionId);
             try (ResultSet rs = ps.executeQuery()) {
