@@ -9,6 +9,7 @@
 
     <!-- (Optional) global stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         /* ===== GLOBAL ===== */

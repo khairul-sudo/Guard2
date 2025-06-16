@@ -1,8 +1,9 @@
+<%@page import="DB.DBConnection"%>
 <%@ page import="java.sql.*" %>
 <%
+     Connection conn = null;
     int id = Integer.parseInt(request.getParameter("id"));
-    Class.forName("com.mysql.jdbc.Driver"); // Use com.mysql.cj.jdbc.Driver if needed
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guarddb", "root", "");
+     conn = DBConnection.getConnection();
 
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         // Update logic
