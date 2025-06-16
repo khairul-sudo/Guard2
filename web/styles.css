@@ -6,6 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 18 May 2025, 10:37:54 pm
     Author     : kirtie
 */
+
 /* Base body and container styles */
 body {
   margin: 0;
@@ -13,17 +14,39 @@ body {
   background-color: #f8f9fa;
 }
 
-.form-container {
-  width: 100%;
-  max-width: 900px;
-  margin: 20px auto;
+/* Container for sidebar + content */
+.container {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 20px;
+  gap: 30px; /* No default gap between elements */
   padding: 20px;
+  flex-wrap: nowrap; /* Prevents wrapping on larger screens */
+    width: 100%; /* Ensure it takes up the full width */
+}
+
+/* Sidebar stays on the left */
+.sidebar {
+  width: 200px; /* Fixed width for sidebar */
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  margin-right: 30px;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* Main content area (form container) */
+.form-container {
+  flex: 1; /* Content area takes up remaining space */
+  padding: 40px;
   background-color: #ffffff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+    margin-left: 30px; /* Adds gap between sidebar and form */
   border-radius: 10px;
-  text-align: left;
+  max-width: 900px;
+  text-align: center;
   box-sizing: border-box;
-  overflow-x: auto;
 }
 
 /* Headings */
@@ -31,7 +54,6 @@ body {
   font-size: 2.4rem;
   font-weight: 700;
   color: #007bff;
-  text-align: center;
   margin-bottom: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -44,10 +66,7 @@ input[type="text"], input[type="number"], input[type="submit"], button {
   padding: 12px 15px;
   box-sizing: border-box;
   margin-bottom: 20px;
-}
-
-input[type="text"], input[type="number"] {
-  width: 100%;
+  width: 50%;
 }
 
 input[type="submit"], button {
@@ -114,15 +133,6 @@ tbody td:first-child {
   text-align: left;
 }
 
-/* Responsive data-label for small devices */
-tbody td[data-label]::before {
-  content: attr(data-label);
-  float: left;
-  font-weight: 700;
-  color: #555;
-  display: none; /* hidden on desktop */
-}
-
 /* Actions cell */
 table td.actions {
   white-space: nowrap;
@@ -163,29 +173,37 @@ table td.actions a.delete:hover {
   background-color: #c82333;
 }
 
-/* Responsive styles */
-@media (max-width: 600px) {
+/* Responsive styles for small devices */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack sidebar and form */
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%; /* Sidebar takes full width */
+    margin-bottom: 20px; /* Adds space between sidebar and form */
+  }
+
   .form-container {
-    width: 95%;
-    padding: 20px 15px;
+    width: 100%; /* Form takes full width */
+    margin-left: 0;
+    padding: 20px;
   }
-  
-  .form-container h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
+
   input[type="text"], input[type="number"], input[type="submit"], button {
     font-size: 1rem;
     padding: 10px 12px;
     margin-bottom: 16px;
+    width: 100%; /* Full width on mobile */
   }
-  
+
+  /* Table responsive adjustments */
   table, tbody, td, tr {
     display: block;
     width: 100%;
   }
-  
+
   tbody tr {
     margin-bottom: 20px;
     background: #fff;
@@ -193,6 +211,7 @@ table td.actions a.delete:hover {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 15px;
   }
+
   tbody td {
     text-align: right;
     padding-left: 50%;
@@ -200,7 +219,7 @@ table td.actions a.delete:hover {
     white-space: normal;
     font-size: 1rem;
   }
-  
+
   tbody td::before {
     content: attr(data-label);
     position: absolute;
@@ -211,12 +230,12 @@ table td.actions a.delete:hover {
     text-align: left;
     white-space: nowrap;
   }
-  
+
   table td.actions {
     text-align: center;
     padding-left: 15px;
   }
-  
+
   table td.actions a {
     display: inline-block;
     padding: 8px 14px;

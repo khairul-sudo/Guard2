@@ -46,7 +46,7 @@
     <br><br>
     <button onclick="window.print()">Print Patrol Summary</button>
     <br><br>
-    <button onclick="window.location.href='index.jsp'">Homepage</button>
+    <button onclick="window.location.href='homepage.jsp'">Homepage</button>
     </div>
 </body>
 </html>
