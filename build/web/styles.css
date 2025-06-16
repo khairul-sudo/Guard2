@@ -14,7 +14,153 @@ body {
   background-color: #f8f9fa;
 }
 
-.sidebar {
+/* Container for content only (no sidebar) */
+.container {
+  display: flex;
+  justify-content: center; /* Center the content */
+  padding: 20px;
+  gap: 20px; /* Space around the form container */
+  width: 100%;
+  flex-wrap: wrap; /* Allow wrapping if the screen is small */
+}
+
+/* Main content area (form container) */
+.form-container {
+  width: 100%; /* Take up full width of the container */
+  padding: 40px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  max-width: 900px; /* Maximum width for form */
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Headings */
+.form-container h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Inputs and buttons */
+input[type="text"], input[type="number"], input[type="submit"], button {
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1.8px solid #ced4da;
+  padding: 12px 15px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+input[type="submit"], button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  padding: 14px 20px;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, button:hover {
+  background-color: #0056b3;
+}
+
+/* Table styles */
+table {
+  width: 90%;
+  max-width: 700px;
+  border-collapse: collapse;
+  margin: 30px auto 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+}
+
+thead th {
+  padding: 18px 25px;
+  font-weight: 700;
+  text-align: center;
+  user-select: none;
+  font-size: 1.1rem;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #e9f0ff;
+}
+
+tbody td {
+  padding: 14px 20px;
+  text-align: center;
+  vertical-align: middle;
+  color: #333;
+  white-space: normal;
+  font-size: 1.1rem;
+}
+
+/* Align first column text left for better readability */
+tbody td:first-child {
+  text-align: left;
+}
+
+/* Actions cell */
+table td.actions {
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Action links styled as buttons */
+table td.actions a {
+  display: inline-block;
+  padding: 10px 18px;
+  margin: 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  border: none;
+}
+
+/* Edit button style */
+table td.actions a.edit {
+  background-color: #28a745;
+}
+
+table td.actions a.edit:hover {
+  background-color: #218838;
+}
+
+/* Delete button style */
+table td.actions a.delete {
+  background-color: #dc3545;
+}
+
+table td.actions a.delete:hover {
+  background-color: #c82333;
+}
+
+sidebar {
     width: 250px;
     background-color: #ffffff;
     border-right: 1px solid #e0e0e0;
@@ -149,163 +295,11 @@ body {
     
 }
 
-/* Sidebar stays on the left */
-.sidebar {
-  width: 200px; /* Fixed width for sidebar */
-  min-height: 100vh;
-  background-color: #f8f9fa;
-  margin-right: 30px;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-}
-
-/* Main content area (form container) */
-.form-container {
-  flex: 1; /* Content area takes up remaining space */
-  padding: 40px;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
-  border-radius: 10px;
-  max-width: 900px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-/* Headings */
-.form-container h2 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: #007bff;
-  margin-bottom: 30px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Inputs and buttons */
-input[type="text"], input[type="number"], input[type="submit"], button {
-  font-size: 1.2rem;
-  border-radius: 6px;
-  border: 1.8px solid #ced4da;
-  padding: 12px 15px;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  width: 50%;
-}
-
-input[type="submit"], button {
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  border: none;
-  font-weight: 700;
-  padding: 14px 20px;
-  transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover, button:hover {
-  background-color: #0056b3;
-}
-
-/* Table styles */
-table {
-  width: 90%;
-  max-width: 700px;
-  border-collapse: collapse;
-  margin: 30px auto 0;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  box-sizing: border-box;
-}
-
-thead {
-  background-color: #007bff;
-  color: white;
-}
-
-thead th {
-  padding: 18px 25px;
-  font-weight: 700;
-  text-align: center;
-  user-select: none;
-  font-size: 1.1rem;
-}
-
-tbody tr {
-  border-bottom: 1px solid #ddd;
-  transition: background-color 0.3s ease;
-}
-
-tbody tr:hover {
-  background-color: #e9f0ff;
-}
-
-tbody td {
-  padding: 14px 20px;
-  text-align: center;
-  vertical-align: middle;
-  color: #333;
-  white-space: normal;
-  font-size: 1.1rem;
-}
-
-/* Align first column text left for better readability */
-tbody td:first-child {
-  text-align: left;
-}
-
-/* Actions cell */
-table td.actions {
-  white-space: nowrap;
-  text-align: center;
-}
-
-/* Action links styled as buttons */
-table td.actions a {
-  display: inline-block;
-  padding: 10px 18px;
-  margin: 0 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 6px;
-  text-decoration: none;
-  cursor: pointer;
-  color: white;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  border: none;
-}
-
-/* Edit button style */
-table td.actions a.edit {
-  background-color: #28a745;
-}
-
-table td.actions a.edit:hover {
-  background-color: #218838;
-}
-
-/* Delete button style */
-table td.actions a.delete {
-  background-color: #dc3545;
-}
-
-table td.actions a.delete:hover {
-  background-color: #c82333;
-}
-
 /* Responsive styles for small devices */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Stack sidebar and form */
+    flex-direction: column; /* Stack form elements vertically */
     padding: 10px;
-  }
-
-  .sidebar {
-    width: 100%; /* Sidebar takes full width */
-    margin-bottom: 20px; /* Adds space between sidebar and form */
   }
 
   .form-container {
