@@ -220,7 +220,7 @@
             </table>
 
             <!-- ===== BACK BUTTON ===== -->
-            <form action="index.jsp" method="get" style="display:inline;">
+            <form action="homepage.jsp" method="get" style="display:inline;">
                 <button type="submit" class="btn">Back</button>
             </form>
         </div>

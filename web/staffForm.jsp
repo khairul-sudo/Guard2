@@ -9,56 +9,56 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-Staff staff = (Staff) request.getAttribute("staff");
-boolean isEdit = (staff != null);
+    Staff staff = (Staff) request.getAttribute("staff");
+    boolean isEdit = (staff != null);
 %>
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= isEdit ? "Edit Staff" : "Add New Staff" %></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="guardManagementStyling.css">
-</head>
-<body>
-    
-    <div id="menu-btn" onclick="toggleSidebar()">&#9776;</div>
-    <%@ include file="sidebar.jsp" %>
-    <%@ include file="header.jsp" %>
+    <head>
+        <title><%= isEdit ? "Edit Staff" : "Add New Staff"%></title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="guardManagementStyling.css">
+    </head>
+    <body>
 
-<div class="form-container">
-    <h2><%= isEdit ? "Edit Staff" : "Add New Staff" %></h2>
+        <div id="menu-btn" onclick="toggleSidebar()">&#9776;</div>
+        <%@ include file="sidebar.jsp" %>
+        <%@ include file="header.jsp" %>
 
-    <form method="post" action="staff">
-        <% if (isEdit) { %>
-            <input type="hidden" name="administratorAdminID" value="<%= staff.getAdministratorAdminID() %>" />
-            <input type="hidden" name="guardGuardID" value="<%= staff.getGuardGuardID() %>" />
-        <% } %>
+        <div class="form-container">
+            <h2><%= isEdit ? "Edit Staff" : "Add New Staff"%></h2>
 
-        <label for="administratorAdminID">Administrator ID:</label>
-        <input type="number" id="administratorAdminID" name="administratorAdminID" required
-            value="<%= isEdit ? staff.getAdministratorAdminID() : "" %>" <%= isEdit ? "readonly" : "" %> />
+            <form method="post" action="staff">
+                <% if (isEdit) {%>
+                <input type="hidden" name="administratorAdminID" value="<%= staff.getAdministratorAdminID()%>" />
+                <input type="hidden" name="guardGuardID" value="<%= staff.getGuardGuardID()%>" />
+                <% }%>
 
-        <label for="guardGuardID">Guard ID:</label>
-        <input type="number" id="guardGuardID" name="guardGuardID" required
-            value="<%= isEdit ? staff.getGuardGuardID() : "" %>" <%= isEdit ? "readonly" : "" %> />
+                <label for="administratorAdminID">Administrator ID:</label>
+                <input type="number" id="administratorAdminID" name="administratorAdminID" required
+                       value="<%= isEdit ? staff.getAdministratorAdminID() : ""%>" <%= isEdit ? "readonly" : ""%> />
 
-        <label for="icNumber">IC Number:</label>
-        <input type="text" id="icNumber" name="icNumber" required maxlength="12" minlength="12"
-               pattern="\d{12}" title="Please enter exactly 12 digits"
-               value="<%= isEdit ? staff.getIcNumber() : "" %>" />
+                <label for="guardGuardID">Guard ID:</label>
+                <input type="number" id="guardGuardID" name="guardGuardID" required
+                       value="<%= isEdit ? staff.getGuardGuardID() : ""%>" <%= isEdit ? "readonly" : ""%> />
 
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required maxlength="10" minlength="10"
-               pattern="\d{10}" title="Please enter exactly 10 digits"
-               value="<%= isEdit ? staff.getPhoneNumber() : "" %>" />
+                <label for="icNumber">IC Number:</label>
+                <input type="text" id="icNumber" name="icNumber" required maxlength="12" minlength="12"
+                       pattern="\d{12}" title="Please enter exactly 12 digits"
+                       value="<%= isEdit ? staff.getIcNumber() : ""%>" />
 
-        <button type="submit"><%= isEdit ? "Update" : "Add" %></button>
-        <a href="staff" style="display:inline-block; margin-top: 15px; color:#007bff;">Cancel</a>
-    </form>
-</div>
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" required maxlength="10" minlength="10"
+                       pattern="\d{10}" title="Please enter exactly 10 digits"
+                       value="<%= isEdit ? staff.getPhoneNumber() : ""%>" />
 
-</body>
+                <button type="submit"><%= isEdit ? "Update" : "Add"%></button>
+                <a href="staff" style="display:inline-block; margin-top: 15px; color:#007bff;">Cancel</a>
+            </form>
+        </div>
+
+    </body>
 </html>
 
