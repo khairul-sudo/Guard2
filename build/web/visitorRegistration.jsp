@@ -1,22 +1,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Visitor Registration</title>
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="guardManagementStyling.css">
 </head>
 <body>
+
+    <!-- Sidebar & Header -->
     <div id="menu-btn" onclick="toggleSidebar()">&#9776;</div>
     <%@ include file="sidebar.jsp" %>
     <%@ include file="header.jsp" %>
 
-    <div class="content container mt-5">
-        <div class="card shadow-sm border-0">
+    <!-- Main Form Section -->
+    <div class="content centered-form-container">
+        <div class="card shadow-sm border-0 p-4">
             <div class="card-body">
                 <h2 class="card-title mb-4 text-center">Visitor Registration</h2>
+
                 <form action="VisitorRegistrationServlet" method="post" class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -24,9 +32,10 @@
                             <input type="text" class="form-control" name="Name" id="name" placeholder="Ali bin Abu" required>
                             <div class="invalid-feedback">Please enter your full name.</div>
                         </div>
+
                         <div class="col-md-6">
                             <label for="IC" class="form-label">IC Number</label>
-                            <input type="text" class="form-control form-control-sm w-75" name="IC" id="IC" pattern="^\d{6}-\d{2}-\d{4}$" placeholder="991122-01-1234" required>
+                            <input type="text" class="form-control" name="IC" id="IC" pattern="^\\d{6}-\\d{2}-\\d{4}$" placeholder="991122-01-1234" required>
                             <div class="invalid-feedback">Please enter a valid IC number (e.g. 991122-01-1234).</div>
                         </div>
 
@@ -51,7 +60,6 @@
                             <div id="otherPurposeContainer" class="mt-2" style="display:none;">
                                 <label for="otherPurpose" class="form-label">Please specify:</label>
                                 <input type="text" class="form-control" id="otherPurpose" name="PurposeOther">
-                                <div class="invalid-feedback">Please enter your purpose.</div>
                             </div>
                         </div>
 
@@ -65,6 +73,7 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="HamburgerButton.js"></script>
 
@@ -84,7 +93,7 @@
             });
         })();
 
-        // Show/hide custom purpose input
+        // Toggle other purpose input
         function toggleOtherPurpose(select) {
             const otherContainer = document.getElementById('otherPurposeContainer');
             const otherInput = document.getElementById('otherPurpose');
@@ -95,7 +104,7 @@
             } else {
                 otherContainer.style.display = "none";
                 otherInput.removeAttribute("required");
-                otherInput.value = ""; // Clear previous text
+                otherInput.value = "";
             }
         }
     </script>

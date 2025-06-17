@@ -60,7 +60,7 @@
 
 .forgot-password-link {
     font-size: 0.9em;
-    color: #007BFF; /* Bootstrap-style blue */
+    color: #007BFF;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -76,10 +76,7 @@
     color: red;
 }
 
-
-
-/* Custom styles for the sidebar and layout */
-
+/* === Custom styles for layout === */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -88,6 +85,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 html, body {
     height: 100%;
     margin: 0;
@@ -95,10 +93,7 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-/* Background for login page */
 .background-Login {
-    margin: 0;
-    font-family: Arial, sans-serif;
     background-image: url('img/guardManagementSystemBackground.jpg');
     background-size: cover;
     background-position: center;
@@ -106,32 +101,28 @@ html, body {
 }
 
 .background-Register {
-    margin: 0;
-    font-family: Arial, sans-serif;
     background-image: url('img/guardManagementSystemBackground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-
 #menu-btn {
-    display:none;
+    display: none;
 }
 
 .home-icon {
     font-size: 24px;
-    color: #007bff; /* Bootstrap primary color */
+    color: #007bff;
     text-decoration: none;
-    margin-right: 15px; /* Space between home and menu */
+    margin-right: 15px;
 }
-
 
 .sidebar {
     width: 250px;
     background-color: #ffffff;
     border-right: 1px solid #e0e0e0;
-    padding-top: 56px; /* below header */
+    padding-top: 56px;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -166,7 +157,9 @@ html, body {
 
 .sidebar .nav-link i {
     margin-right: 10px;
-}.sidebar .nav-link:hover,
+}
+
+.sidebar .nav-link:hover,
 .sidebar .nav-link.active {
     background-color: #f9f9f9;
     color: #007bff;
@@ -206,8 +199,8 @@ html, body {
 }
 
 .content {
-    margin-left: 250px; /* space for sidebar */
-    margin-top: 56px;   /* space for header */
+    margin-left: 250px;
+    margin-top: 56px;
     padding: 2rem;
     background-color: #f4f4f4;
     min-height: 100vh;
@@ -217,22 +210,20 @@ html, body {
     color: #212529;
 }
 
-
-
 .header {
-   height: 56px; 
-   background: #ffffff; 
-   border-bottom: 1px solid #ddd; 
-   display: flex; 
-   align-items: center; 
-   justify-content: space-between; 
-   padding: 0 20px; 
-   position: fixed; 
-   width: 100%; 
-   top: 0; 
-   z-index: 1000;
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
-/* Hover effect for "Guard Management" header title */
+
 .header-title {
     color: #333;
     font-weight: bold;
@@ -248,7 +239,6 @@ html, body {
     text-decoration: underline;
 }
 
-/* Hover effect for Logout link */
 .logout-link {
     color: #dc3545;
     font-weight: bold;
@@ -257,65 +247,12 @@ html, body {
 }
 
 .logout-link:hover {
-    color: darkred; /* Darker red on hover */
-    text-decoration: underline;
-    
-}
-
-
-/* ===== SUCCESS PAGE STYLING ===== */
-.success-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.success-box {
-   background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 500px;
-}
-
-.success-icon {
-    font-size: 60px;
-    color: #28a745;
-    margin-bottom: 20px;
-}
-
-.success-title {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.success-message {
-    color: #555;
-    font-size: 16px;
-    margin-bottom: 15px;
-}
-
-.success-link {
-    color: #007bff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.success-link:hover {
+    color: darkred;
     text-decoration: underline;
 }
 
-.countdown-text {
-    font-weight: bold;
-    color: #007bff;
-}
-
+/* === SUCCESS PAGE STYLING === */
+.success-body,
 .logout-body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
@@ -327,6 +264,7 @@ html, body {
     height: 100vh;
 }
 
+.success-box,
 .logout-box {
     background: #fff;
     padding: 40px;
@@ -336,29 +274,38 @@ html, body {
     max-width: 500px;
 }
 
+.success-icon,
 .logout-icon {
     font-size: 60px;
-    color: #007bff;
+    color: #28a745;
     margin-bottom: 20px;
 }
 
-.logout-title {
-    margin: 0 0 10px;
-    color: #333;
+.logout-icon {
+    color: #007bff;
 }
 
+.success-title,
+.logout-title {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.success-message,
 .logout-message {
     color: #555;
-    margin-bottom: 20px;
     font-size: 16px;
+    margin-bottom: 15px;
 }
 
+.success-link,
 .logout-link {
     color: #007bff;
     font-weight: bold;
     text-decoration: none;
 }
 
+.success-link:hover,
 .logout-link:hover {
     text-decoration: underline;
 }
@@ -368,10 +315,56 @@ html, body {
     color: #007bff;
 }
 
-/* Doughnut chart sizing */
-
+/* === Chart Sizing === */
 #doughnutChart {
     max-width: 600px;
     max-height: 500px;
     margin: auto;
+}
+
+/* === Centered Visitor Registration/Edit Form === */
+.centered-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 56px);
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+}
+
+.centered-form-container .card {
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+}
+
+.centered-form-container .card-title {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.centered-form-container .form-control,
+.centered-form-container .form-select {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.centered-form-container .text-end button {
+    min-width: 100px;
+}
+
+.invalid-feedback {
+    display: none;
+    font-size: 0.875rem;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-select:invalid ~ .invalid-feedback {
+    display: block;
 }
