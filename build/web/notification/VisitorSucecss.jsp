@@ -6,9 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Registration Successful</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styling -->
+    <link rel="stylesheet" href="../guardManagementStyling.css">
+
     <script>
         let seconds = 5;
 
@@ -27,9 +35,17 @@
         window.onload = countdown;
     </script>
 </head>
-<body>
-    <h2>Registration Successful!</h2>
-    <p>You will be redirected to the home page in <span id="countdown">5</span> seconds...</p>
-    <p>If you are not redirected automatically, <a href="../homepage.jsp">click here</a>.</p>
+
+<body class="logout-body">
+    <div class="logout-box">
+        <i class="fas fa-check-circle logout-icon" style="color: #27ae60;"></i>
+        <h2 class="logout-title">Registration Successful!</h2>
+        <p class="logout-message">
+            Redirecting to the home page in <span id="countdown" class="countdown-text">5</span> seconds...
+        </p>
+        <p class="logout-message">
+            If not redirected, <a href="../homepage.jsp" class="logout-link">click here</a>.
+        </p>
+    </div>
 </body>
 </html>

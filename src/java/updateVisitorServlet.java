@@ -1,3 +1,4 @@
+
 import dao.visitorDAO;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -6,6 +7,7 @@ import java.sql.SQLException;
 import user.Visitor;
 
 public class updateVisitorServlet extends HttpServlet {
+
     private visitorDAO visitorDAO;
 
     @Override
@@ -20,9 +22,15 @@ public class updateVisitorServlet extends HttpServlet {
         String ic = request.getParameter("IC");
         String address = request.getParameter("Address");
         String purpose = request.getParameter("Purpose");
+        if ("Other".equalsIgnoreCase(purpose)) {
+            String custom = request.getParameter("PurposeOther");
+            if (custom != null && !custom.trim().isEmpty()) {
+                purpose = custom.trim();
+            }
+        }
         String visitDateTime = request.getParameter("visitDateTime");
 
-        Visitor visitor = new Visitor(name, ic, address, purpose,visitDateTime);
+        Visitor visitor = new Visitor(name, ic, address, purpose, visitDateTime);
         visitor.setId(id);
 
         try {

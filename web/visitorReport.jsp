@@ -79,6 +79,7 @@
                     <th>IC</th>
                     <th>Address</th>
                     <th>Purpose</th>
+                    <th>Date and Time</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -90,6 +91,7 @@
                     <td><%= v.getIc() %></td>
                     <td><%= v.getAddress() %></td>
                     <td><%= v.getPurpose() %></td>
+                    <td><%= v.getVisitDateTime() %></td>
                     <td>
                         <a href="editVisitor.jsp?id=<%= v.getId() %>" class="btn btn-sm btn-warning">Edit</a>
                         <a href="deleteVisitorServlet?id=<%= v.getId() %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete <%= v.getName() %>?')">Delete</a>

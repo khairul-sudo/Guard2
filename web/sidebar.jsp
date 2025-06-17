@@ -24,12 +24,5 @@
     <a class="nav-link" href="#" onclick="toggleSubmenu('visitor')"><i class="fas fa-id-badge"></i> Visitor Report</a>
     <div id="visitor-submenu" class="submenu">
         <a href="visitorReport.jsp">Visitor Report</a>
-        <a href="#">Visitor Data</a>
     </div>
-
-    <%-- <a class="nav-link" href="#" onclick="toggleSubmenu('report')"><i class="fas fa-chart-bar"></i> Report</a>
-    <div id="report-submenu" class="submenu">
-        <a href="#">Table</a>
-        <a href="#">Graph</a>
-    </div> --%> 
 </div>

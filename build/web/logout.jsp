@@ -26,7 +26,7 @@
                 const countdownElement = document.getElementById('countdown');
                 countdownElement.innerText = seconds;
                 if (seconds === 0) {
-                    window.location.href = 'Login   .html';
+                    window.location.href = 'Login.html';
                 } else {
                     seconds--;
                     setTimeout(countdown, 1000);
