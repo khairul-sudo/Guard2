@@ -18,7 +18,7 @@
 
     <style>
         .content-wrapper {
-            margin-left: 250px; /* adjust if sidebar width changes */
+            margin-left: 240px; /* adjust if sidebar width changes */
             min-height: 80vh;
             display: flex;
             align-items: center;
@@ -28,8 +28,8 @@
 
         .card {
             width: 100%;
-            max-width: 1100px;
-            padding: 20px 30px;
+            max-width: 1200px;
+            padding: 30px 40px;
             border-radius: 10px;
         }
 
