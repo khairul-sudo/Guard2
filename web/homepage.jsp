@@ -54,6 +54,28 @@
     }
 %>
 
+<%
+    int adminCount = 0, guardCount = 0;
+    try {
+        Connection con = DBConnection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT roles, COUNT(*) AS total FROM user GROUP BY roles");
+
+        while (rs.next()) {
+            String role = rs.getString("roles");
+            if ("Administrator".equalsIgnoreCase(role)) {
+                adminCount = rs.getInt("total");
+            } else if ("Guard".equalsIgnoreCase(role)) {
+                guardCount = rs.getInt("total");
+            }
+        }
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+%>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -77,7 +99,7 @@
 
         <!-- Main Content -->
         <div class="content p-4">
-            <h2 class="mb-4">Admin Dashboard</h2>
+            <h2 class="mb-4">Data Overview</h2>
 
             <!-- Cards -->
             <div class="row mb-4">
@@ -136,47 +158,61 @@
             const doughnutChart = new Chart(document.getElementById('doughnutChart'), {
             type: 'doughnut',
                     data: {
-                    labels: ['Chrome', 'IE', 'Firefox', 'Safari', 'Opera', 'Navigator'],
+                    labels: ['Admin', 'Guard'],
                             datasets: [{
-                            label: 'Browser Usage',
-                                    data: [40, 15, 20, 10, 10, 5],
-                                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#c9cbcf']
+                            label: 'User Roles',
+                                    data: [<%= adminCount%>, <%= guardCount%>],
+                                    backgroundColor: ['#36A2EB', '#FF6384']
                             }]
+                    },
+                    options: {
+                    responsive: true,
+                            plugins: {
+                            legend: {
+                            display: true,
+                                    position: 'top'
+                            }
+                            }
                     }
             });
-    const barChart = new Chart(document.getElementById('barChart'), {
-        type: 'bar',
-        data: {
-            labels: [
-                <% for (String month : monthlyVisitorData.keySet()) { %>
-                    "<%= month %>",
-                <% } %>
-            ],
-            datasets: [{
-                label: 'Visitors Registered',
-                backgroundColor: '#36A2EB',
-                data: [
-                    <% for (int count : monthlyVisitorData.values()) { %>
-                        <%= count %>,
-                    <% } %>
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
+            const barChart = new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+                    data: {
+                    labels: [
+            <% for (String month : monthlyVisitorData.keySet()) {%>
+                    "<%= month%>",
+            <% } %>
+                    ],
+                            datasets: [{
+                            label: 'Visitors Registered',
+                                    backgroundColor: '#36A2EB',
+                                    data: [
+            <% for (int count : monthlyVisitorData.values()) {%>
+            <%= count%>,
+            <% }%>
+                                    ]
+                            }]
+                    },
+                    options: {
+                    responsive: true,
+                            plugins: {
+                            legend: {
+                            display: true
+                            }
+                            },
+                            scales: {
+                            y: {
+                            beginAtZero: false,
+                                    min: 1,
+                                    max: 10,
+                                    ticks: {
+                                    stepSize: 1
+                                    }
+                            }
+                            }
+                    }
+            });
+        </script>
 
     </body>
 </html>

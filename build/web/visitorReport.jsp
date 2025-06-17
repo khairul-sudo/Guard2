@@ -79,8 +79,8 @@
                     <th>IC</th>
                     <th>Address</th>
                     <th>Purpose</th>
-                    <th>Actions</th>
                     <th>Date and Time</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
