@@ -35,7 +35,7 @@
 
                         <div class="col-md-6">
                             <label for="IC" class="form-label">IC Number</label>
-                            <input type="text" class="form-control" name="IC" id="IC" pattern="^\\d{6}-\\d{2}-\\d{4}$" placeholder="991122-01-1234" required>
+                            <input type="text" class="form-control" name="IC" id="IC" pattern="^\d{6}-\d{2}-\d{4}$" placeholder="991122-01-1234" required>
                             <div class="invalid-feedback">Please enter a valid IC number (e.g. 991122-01-1234).</div>
                         </div>
 

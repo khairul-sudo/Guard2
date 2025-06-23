@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
                 userID = rs.getInt(1);
             }
 
-            if ("Guard".equalsIgnoreCase(roles)) {
+            if ("guard".equalsIgnoreCase(roles)) {
                 String sqlGuard = "INSERT INTO guard (userID) VALUES (?)";
                 PreparedStatement psGuard = con.prepareStatement(sqlGuard);
                 psGuard.setInt(1, userID);

@@ -19,7 +19,7 @@
             <label>Role:</label>
             <select name="roles" required>
                 <option value="Administrator" ${param.roles == 'Administrator' ? 'selected' : ''}>Administrator</option>
-                <option value="Staff" ${param.roles == 'Staff' ? 'selected' : ''}>Staff</option>
+                <option value="Guard" ${param.roles == 'Staff' ? 'selected' : ''}>Staff</option>
             </select>
             <label>Email:</label>
             <input type="email" name="email" required value="${param.email}">
